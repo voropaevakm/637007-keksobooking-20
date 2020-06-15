@@ -50,7 +50,6 @@ var getAnnouncement = function () {
         x: getRandomRange(45, 1155),
         y: getRandomRange(130, 630)
       }
-    }
   };
 
   return announcement;
