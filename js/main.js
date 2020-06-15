@@ -17,17 +17,17 @@ var arrayOfTypes = {
   bungalo: 'Бунгало',
 };
 
-//Функция получения случайного числа в заданном интервале
+// Функция получения случайного числа в заданном интервале
 function getRandomRange(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-//Функция получения случайного числа
+// Функция получения случайного числа
 function getRandomIndex(selectArray) {
   return Math.floor(Math.random() * Math.floor(selectArray.length));
 }
 
-//Функция формирования объекта карточки
+// Функция формирования объекта карточки
 var getAnnouncement = function () {
   var announcement = {
     author: {
@@ -42,20 +42,20 @@ var getAnnouncement = function () {
       guests: getRandomRange(1, 3),
       checkin: CHECKIN[getRandomIndex(CHECKIN)],
       checkout: CHECKOUT[getRandomIndex(CHECKOUT)],
-      features: FEATURES.slice(0, getRandomInRange(0, FEATURES.length)),
+      features: FEATURES.slice(0, getRandomRange(0, FEATURES.length)),
       description: DESCRIPTION[getRandomIndex(DESCRIPTION)],
-      photos: PHOTOS.slice(0, getRandomInRange(0, PHOTOS.length)),
+      photos: PHOTOS.slice(0, getRandomRange(0, PHOTOS.length)),
     },
-      location: {
-        x: getRandomRange(45, 1155),
-        y: getRandomRange(130, 630)
-      }
+    location: {
+      x: getRandomRange(45, 1155),
+      y: getRandomRange(130, 630)
+    }
   };
 
   return announcement;
 }
 
-//Создание DOM-элементов, соответствующим меткам на карте
+// Создание DOM-элементов, соответствующим меткам на карте
 var similarPinElement = document.querySelector('.map__pins');
 
 var similarPinTemplate = document.querySelector('#pin')
@@ -74,7 +74,7 @@ function renderPinFragment(announcement) {
 
 var pinFragment = document.createDocumentFragment();
 
-function getInsert(COUNT) {
+function getInsert() {
   for (var i = 0; i < COUNT; i++) {
     pinFragment.appendChild(renderPinFragment(getAnnouncement()));
   }
@@ -83,12 +83,12 @@ function getInsert(COUNT) {
 
 getInsert(COUNT);
 
-//Поиск шаблона карточки
+// Поиск шаблона карточки
 var similarCardTemplate = document.querySelector('#card')
     .content
     .querySelector('.map__card');
 
-//Функция проверки данных
+// Функция проверки данных
 function checkData(nodeElement, data, option, insertText) {
   if (!data) {
     nodeElement.style.display = 'none';
@@ -102,7 +102,7 @@ function checkData(nodeElement, data, option, insertText) {
   }
 }
 
-//Вспомогательная функция рендеринга свойства Features объекта
+// Вспомогательная функция рендеринга свойства Features объекта
 function renderCardFeatures(nodeElement, featuresArray) {
   nodeElement.innerHTML = '';
   if (!featuresArray.length) {
@@ -117,8 +117,8 @@ function renderCardFeatures(nodeElement, featuresArray) {
   });
 }
 
-//Вспомогательная функция рендеринга свойства Photos объекта
-function renderPhotosPopup(nodeElement, photosArray) {
+// Вспомогательная функция рендеринга свойства Photos объекта
+function renderCardPhotos(nodeElement, photosArray) {
   nodeElement.innerHTML = '';
   if (!photosArray.length) {
     nodeElement.style.display = 'none';
@@ -135,7 +135,7 @@ function renderPhotosPopup(nodeElement, photosArray) {
   });
 }
 
-//Главная функция рендеринга
+// Главная функция рендеринга
 var cardFragment = document.createDocumentFragment();
 
 function renderCardFragment(announcement) {
