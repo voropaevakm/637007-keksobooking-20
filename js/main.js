@@ -48,7 +48,7 @@ var getAnnouncement = function () {
     },
       location: {
         x: getRandomRange(45, 1155),
-        y: getRandomRange(130, 630);
+        y: getRandomRange(130, 630)
       }
     }
   };
