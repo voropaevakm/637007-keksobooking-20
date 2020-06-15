@@ -47,7 +47,7 @@ var getAnnouncement = function () {
       photos: PHOTOS.slice(0, getRandomInRange(0, PHOTOS.length)),
     },
       location: {
-        x: getRandomRange(45, 1155),;
+        x: getRandomRange(45, 1155),
         y: getRandomRange(130, 630);
       }
     }
