@@ -51,7 +51,6 @@ var getAnnouncement = function () {
       y: getRandomRange(130, 630)
     }
   };
-
   return announcement;
 }
 
