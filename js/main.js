@@ -74,7 +74,7 @@ var getAnnouncement = function () {
       title: TITLES[getRandomIndex(TITLES)],
       address: getRandomRange(1, 600) + ', ' + getRandomRange(1, 350),
       price: getRandomRange(10000, 50000),
-      type: TYPE[getRandomIndex(TYPE)],
+      type: TYPES[getRandomIndex(TYPES)],
       rooms: getRandomRange(1, 3),
       guests: getRandomRange(1, 3),
       checkin: CHECKINS[getRandomIndex(CHECKINS)],
@@ -93,7 +93,7 @@ var getAnnouncement = function () {
 
 
 // Функция проверки и изменения данных
-function changeData(nodeElement, data, option, insertText) {
+function changeData(nodeElement, data) {
   if (!data) {
     nodeElement.style.display = 'none';
     return;
