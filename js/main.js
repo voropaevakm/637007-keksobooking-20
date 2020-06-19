@@ -17,54 +17,6 @@ var arrayOfTypes = {
   bungalo: 'Бунгало',
 };
 
-// Создание DOM-элементов, соответствующим меткам на карте
-var similarPinElement = document.querySelector('.map__pins');
-
-var similarPinTemplate = document.querySelector('#pin')
-  .content
-  .querySelector('.map__pin');
-
-function renderPinFragment(announcement) {
-  var pinElement = similarPinTemplate.cloneNode(true);
-
-  pinElement.querySelector('img').src = announcement.author.avatar;
-  pinElement.querySelector('img').alt = announcement.offer.title;
-  pinElement.style = 'left: ' + announcement.location.x + 'px; top: ' + announcement.location.y + 'px;';
-
-  return pinElement;
-}
-
-var pinFragment = document.createDocumentFragment();
-
-function getInsert() {
-  for (var i = 0; i < COUNT; i++) {
-    pinFragment.appendChild(renderPinFragment(getAnnouncement()));
-  }
-  return similarPinElement.appendChild(pinFragment);
-}
-
-getInsert(COUNT);
-
-// Поиск шаблона карточки
-var similarCardTemplate = document.querySelector('#card')
-    .content
-    .querySelector('.map__card');
-
-// Удаление свойства .map--faded
-var map = document.querySelector('.map');
-map.classList.remove('map--faded');
-
-// Функция получения случайного числа в заданном интервале
-function getRandomRange(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-// Функция получения случайного числа
-function getRandomIndex(selectArray) {
-  return Math.floor(Math.random() * Math.floor(selectArray.length));
-}
-
-// Функция формирования объекта карточки
 var getAnnouncement = function () {
   var announcement = {
     author: {
@@ -91,16 +43,63 @@ var getAnnouncement = function () {
   return announcement;
 }
 
+var similarPinElement = document.querySelector('.map__pins');
 
-// Функция проверки и изменения данных
-function changeData(nodeElement, data) {
+var similarPinTemplate = document.querySelector('#pin')
+  .content
+  .querySelector('.map__pin');
+
+var pinFragment = document.createDocumentFragment();
+
+var similarCardTemplate = document.querySelector('#card')
+    .content
+    .querySelector('.map__card');
+
+var cardFragment = document.createDocumentFragment();
+
+var map = document.querySelector('.map');
+
+
+var cardBeforeElement = map.querySelector('.map__filters-container');
+
+function getRandomRange(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function getRandomIndex(selectArray) {
+  return Math.floor(Math.random() * Math.floor(selectArray.length));
+}
+
+function renderPinFragment(announcement) {
+  var pinElement = similarPinTemplate.cloneNode(true);
+
+  pinElement.querySelector('img').src = announcement.author.avatar;
+  pinElement.querySelector('img').alt = announcement.offer.title;
+  pinElement.style = 'left: ' + announcement.location.x + 'px; top: ' + announcement.location.y + 'px;';
+
+  return pinElement;
+}
+
+function getInsert() {
+  for (var i = 0; i < COUNT; i++) {
+    pinFragment.appendChild(renderPinFragment(getAnnouncement()));
+  }
+  return similarPinElement.appendChild(pinFragment);
+}
+getInsert(COUNT);
+
+function changeData(nodeElement, data, option, insertText) {
   if (!data) {
     nodeElement.style.display = 'none';
     return;
   }
+  if (option) {
+    nodeElement.textContent = insertText;
+  } else {
+    nodeElement.innerHTML = insertText;
+    }
 }
 
-// Вспомогательная функция рендеринга свойства Features объекта
 function renderCardFeatures(nodeElement, featuresArray) {
   nodeElement.innerHTML = '';
   if (!featuresArray.length) {
@@ -115,7 +114,6 @@ function renderCardFeatures(nodeElement, featuresArray) {
   });
 }
 
-// Вспомогательная функция рендеринга свойства Photos объекта
 function renderCardPhotos(nodeElement, photosArray) {
   nodeElement.innerHTML = '';
   if (!photosArray.length) {
@@ -133,18 +131,15 @@ function renderCardPhotos(nodeElement, photosArray) {
   });
 }
 
-// Главная функция рендеринга
-var cardFragment = document.createDocumentFragment();
-
 function renderCardFragment(announcement) {
   var cardElement = similarCardTemplate.cloneNode(true);
 
   changeData(cardElement.querySelector('.popup__title'), announcement.offer.title, true, announcement.offer.title);
   changeData(cardElement.querySelector('.popup__text--address'), announcement.offer.address, true, announcement.offer.address);
-  changeData(cardElement.querySelector('.popup__text--price'), announcement.offer.price, false, announcement.offer.price);
+  changeData(cardElement.querySelector('.popup__text--price'), announcement.offer.price, false, announcement.offer.price +'&#x20bd;<span>/ночь</span>');
   changeData(cardElement.querySelector('.popup__type'), arrayOfTypes[announcement.offer.type], true, arrayOfTypes[announcement.offer.type]);
   changeData(cardElement.querySelector('.popup__text--capacity'), announcement.offer.rooms, true, announcement.offer.rooms + ' комнаты для ' + announcement.offer.guests + ' гостей');
-  changeData(cardElement.querySelector('.popup__text--time'), announcement.offer.checkin, true, 'Заезд в ' + announcement.offer.checkin + ', выезд в ' + announcement.offer.checkout);
+  changeData(cardElement.querySelector('.popup__text--time'), announcement.offer.checkin, true, 'Заезд после ' + announcement.offer.checkin + ', выезд до ' + announcement.offer.checkout);
   changeData(cardElement.querySelector('.popup__description'), announcement.offer.description, true, announcement.offer.description);
   renderCardFeatures(cardElement.querySelector('.popup__features'), announcement.offer.features);
   renderCardPhotos(cardElement.querySelector('.popup__photos'), announcement.offer.photos);
@@ -154,5 +149,6 @@ function renderCardFragment(announcement) {
 
 cardFragment.appendChild(renderCardFragment(getAnnouncement()));
 
-var cardBeforeElement = map.querySelector('.map__filters-container');
+map.classList.remove('map--faded');
+
 map.append(cardFragment, cardBeforeElement);
