@@ -96,7 +96,7 @@ function changeData(nodeElement, data, option, insertText) {
     nodeElement.textContent = insertText;
   } else {
     nodeElement.innerHTML = insertText;
-    }
+  }
 }
 
 function renderCardFeatures(nodeElement, featuresArray) {
@@ -135,7 +135,7 @@ function renderCardFragment(announcement) {
 
   changeData(cardElement.querySelector('.popup__title'), announcement.offer.title, true, announcement.offer.title);
   changeData(cardElement.querySelector('.popup__text--address'), announcement.offer.address, true, announcement.offer.address);
-  changeData(cardElement.querySelector('.popup__text--price'), announcement.offer.price, false, announcement.offer.price +'&#x20bd;<span>/ночь</span>');
+  changeData(cardElement.querySelector('.popup__text--price'), announcement.offer.price, false, announcement.offer.price + '&#x20bd;<span>/ночь</span>');
   changeData(cardElement.querySelector('.popup__type'), arrayOfTypes[announcement.offer.type], true, arrayOfTypes[announcement.offer.type]);
   changeData(cardElement.querySelector('.popup__text--capacity'), announcement.offer.rooms, true, announcement.offer.rooms + ' комнаты для ' + announcement.offer.guests + ' гостей');
   changeData(cardElement.querySelector('.popup__text--time'), announcement.offer.checkin, true, 'Заезд после ' + announcement.offer.checkin + ', выезд до ' + announcement.offer.checkout);
