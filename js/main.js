@@ -17,6 +17,24 @@ var arrayOfTypes = {
   bungalo: 'Бунгало',
 };
 
+var similarPinElement = document.querySelector('.map__pins');
+
+var similarPinTemplate = document.querySelector('#pin')
+  .content
+  .querySelector('.map__pin');
+
+var pinFragment = document.createDocumentFragment();
+
+var similarCardTemplate = document.querySelector('#card')
+    .content
+    .querySelector('.map__card');
+
+var cardFragment = document.createDocumentFragment();
+
+var map = document.querySelector('.map');
+
+var cardBeforeElement = map.querySelector('.map__filters-container');
+
 var getAnnouncement = function () {
   var announcement = {
     author: {
@@ -42,25 +60,6 @@ var getAnnouncement = function () {
   };
   return announcement;
 }
-
-var similarPinElement = document.querySelector('.map__pins');
-
-var similarPinTemplate = document.querySelector('#pin')
-  .content
-  .querySelector('.map__pin');
-
-var pinFragment = document.createDocumentFragment();
-
-var similarCardTemplate = document.querySelector('#card')
-    .content
-    .querySelector('.map__card');
-
-var cardFragment = document.createDocumentFragment();
-
-var map = document.querySelector('.map');
-
-
-var cardBeforeElement = map.querySelector('.map__filters-container');
 
 function getRandomRange(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
