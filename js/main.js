@@ -52,18 +52,18 @@ var timeInInput = document.querySelector('#timein');
 var timeOutInput = document.querySelector('#timeout');
 
 var roomsGuestsValues = {
-    1: [1],
-    2: [1, 2],
-    3: [1, 2, 3],
-    100: [0]
-  };
+  1: [1],
+  2: [1, 2],
+  3: [1, 2, 3],
+  100: [0]
+};
 
-  var flatMinPrices = {
-    bungalo: 0,
-    flat: 1000,
-    house: 5000,
-    palace: 10000
-  };
+var flatMinPrices = {
+  bungalo: 0,
+  flat: 1000,
+  house: 5000,
+  palace: 10000
+};
 
 var getAnnouncement = function () {
   var announcement = {
@@ -159,7 +159,7 @@ function renderCardPhotos(nodeElement, photosArray) {
   });
 }
 
-function renderCardFragment(announcement) {
+/* function renderCardFragment(announcement) {
   var cardElement = similarCardTemplate.cloneNode(true);
 
   changeData(cardElement.querySelector('.popup__title'), announcement.offer.title, true, announcement.offer.title);
@@ -173,7 +173,7 @@ function renderCardFragment(announcement) {
   renderCardPhotos(cardElement.querySelector('.popup__photos'), announcement.offer.photos);
 
   return cardElement;
-}
+}*/
 
 function activationFilterInput(elements, flag) {
   if (!flag) {
@@ -181,17 +181,17 @@ function activationFilterInput(elements, flag) {
       elements[i].setAttribute('disabled', false);
     }
   } else {
-    for (var i = 0; i < elements.length; i++) {
+    for (i = 0; i < elements.length; i++) {
       elements[i].removeAttribute('disabled', false);
     }
   }
 }
 
-function getAddressPointInput () {
+function getAddressPointInput() {
   addressInput.value = Math.ceil(MAIN_PIN_X + pinSize.x / 2) + ', ' + Math.ceil(MAIN_PIN_Y + pinSize.y + PIN_SIZE_POINT_Y);
 }
 
-function mainPinMouseDown (evt) {
+function mainPinMouseDown(evt) {
   evt.preventDefault();
   if (evt.button === 0) {
     map.classList.remove('map--faded');
@@ -204,7 +204,7 @@ function mainPinMouseDown (evt) {
   mainPin.removeEventListener('mousedown', mainPinMouseDown);
 }
 
-function mainPinKeyDown (evt) {
+function mainPinKeyDown(evt) {
   evt.preventDefault();
   if (evt.keyCode === 13) {
     map.classList.remove('map--faded');
@@ -228,9 +228,9 @@ titleInput.addEventListener('invalid', function () {
 titleInput.addEventListener('input', function () {
   var valueLength = titleInput.value.length;
   if (valueLength < minTitleLength) {
-    titleInput.setCustomValidity('Ещё ' + (minTitleLength - valueLength) +' симв.');
+    titleInput.setCustomValidity('Ещё ' + (minTitleLength - valueLength) + ' симв.');
   } else if (valueLength > maxTitleLength) {
-    titleInput.setCustomValidity('Удалите лишние ' + (valueLength - maxTitleLength) +' симв.');
+    titleInput.setCustomValidity('Удалите лишние ' + (valueLength - maxTitleLength) + ' симв.');
   } else {
     titleInput.setCustomValidity('');
   }
@@ -242,7 +242,7 @@ function getTitleBorder() {
 
 function changeTimeInInput() {
   timeOutInput.value = timeInInput.value;
- }
+}
 
 function changeTimeOutInput() {
   timeInInput.value = timeOutInput.value;
@@ -274,7 +274,7 @@ activationFilterInput(adFormFieldsets, false);
 
 addressInput.value = Math.ceil(MAIN_PIN_X + pinSize.x / 2) + ', ' + Math.ceil(MAIN_PIN_Y + pinSize.y / 2);
 
-//cardFragment.appendChild(renderCardFragment(getAnnouncement()));
+// cardFragment.appendChild(renderCardFragment(getAnnouncement()));
 
 map.append(cardFragment, cardBeforeElement);
 
