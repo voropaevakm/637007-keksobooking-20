@@ -21,7 +21,7 @@ var pinSize = {
   y: 65,
 };
 
-/*var arrayOfTypes = {
+/* var arrayOfTypes = {
   palace: 'Дворец',
   flat: 'Квартира',
   house: 'Дом',
@@ -32,7 +32,7 @@ var mainPin = document.querySelector('.map__pin--main');
 var similarPinElement = document.querySelector('.map__pins');
 var similarPinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 var pinFragment = document.createDocumentFragment();
-//var similarCardTemplate = document.querySelector('#card').content.querySelector('.map__card');
+// var similarCardTemplate = document.querySelector('#card').content.querySelector('.map__card');
 var cardFragment = document.createDocumentFragment();
 var map = document.querySelector('.map');
 var cardBeforeElement = map.querySelector('.map__filters-container');
@@ -116,7 +116,7 @@ function getInsert() {
   return similarPinElement.appendChild(pinFragment);
 }
 
-/*function changeData(nodeElement, data, option, insertText) {
+/* function changeData(nodeElement, data, option, insertText) {
   if (!data) {
     nodeElement.style.display = 'none';
     return;
