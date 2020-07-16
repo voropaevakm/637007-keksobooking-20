@@ -68,21 +68,26 @@
     changeData(cardElement.querySelector('.popup__description'), announcement.offer.description, true, announcement.offer.description);
     renderCardFeatures(cardElement.querySelector('.popup__features'), announcement.offer.features);
     renderCardPhotos(cardElement.querySelector('.popup__photos'), announcement.offer.photos);
-    /* closeCardButton.addEventListener('click', function () {
-
-    });
-    document.addEventListener('keydown', function () {
-
-    });*/
-
-
+    closeCardButton.addEventListener('click', removeCard);
+    removeEventListener('click', closeCardButton);
+    document.addEventListener('keydown', closeCard);
+    removeEventListener('keydown', closeCard);
     return cardElement;
+  }
+
+  function removeCard () {
+    var mapCard = document.querySelector('.map__card');
+    mapCard.remove();
+  }
+
+  function closeCard (evt) {
+    window.utils.isEscEvent(evt, removeCard);
   }
 
   map.append(cardFragment, cardBeforeElement);
 
-/*  window.card = {
-   createCard: createCard
- };*/
+ window.card = {
+   renderCardFragment: renderCardFragment
+ };
 
 }());

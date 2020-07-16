@@ -2,13 +2,13 @@
 
 (function () {
 
-  function onEscDown(evt, action) {
+  function isEscEvent(evt, action) {
     if (evt.keyCode === 27) {
       action();
     }
   }
 
   window.utils = {
-    onEscDown: onEscDown
+    isEscEvent: isEscEvent
   };
 }());
