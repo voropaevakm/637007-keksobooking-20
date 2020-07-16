@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var map = document.querySelector('.map')
+  var map = document.querySelector('.map');
   var cardFragment = document.createDocumentFragment();
   var cardBeforeElement = map.querySelector('.map__filters-container');
 
@@ -75,19 +75,19 @@
     return cardElement;
   }
 
-  function removeCard () {
+  function removeCard() {
     var mapCard = document.querySelector('.map__card');
     mapCard.remove();
   }
 
-  function closeCard (evt) {
+  function closeCard(evt) {
     window.utils.isEscEvent(evt, removeCard);
   }
 
   map.append(cardFragment, cardBeforeElement);
 
- window.card = {
-   renderCardFragment: renderCardFragment
- };
+  window.card = {
+    renderCardFragment: renderCardFragment
+  };
 
 }());

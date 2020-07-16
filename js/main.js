@@ -3,7 +3,6 @@
 (function () {
   var BORDER = '2px solid red';
 
-  var adForm = document.querySelector('.ad-form');
   var adFormFieldsets = document.querySelectorAll('.ad-form__element');
   var filter = document.querySelector('.map__filters');
   var filterItems = filter.querySelectorAll('select, input');
@@ -11,7 +10,6 @@
   var roomNumberSelect = document.querySelector('#room_number');
   var priceInput = document.querySelector('#price');
   var typeInput = document.querySelector('#type');
-  var addressInput = document.querySelector('#address');
   var titleInput = document.querySelector('#title');
   var minTitleLength = titleInput.getAttribute('minlength');
   var maxTitleLength = titleInput.getAttribute('maxlength');
