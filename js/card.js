@@ -2,8 +2,6 @@
 
 (function () {
   var map = document.querySelector('.map');
-  var cardFragment = document.createDocumentFragment();
-  var cardBeforeElement = map.querySelector('.map__filters-container');
   var similarCardTemplate = document.querySelector('#card').content.querySelector('.map__card');
   var arrayOfTypes = {
     palace: 'Дворец',
@@ -57,7 +55,7 @@
 
   function createAvatar(nodeElement, data) {
     if (!data) {
-      nodeElementelement.style.display = 'none';
+      nodeElement.style.display = 'none';
       return;
     }
     nodeElement.src = data;
