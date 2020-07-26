@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var COUNT = 7;
+  var COUNT = 5;
   var filter = document.querySelector('.map__filters');
   var filterItems = filter.querySelectorAll('select, input');
   var typeSelect = filter.querySelector('#housing-type');
@@ -9,18 +9,18 @@
   var roomsSelect = filter.querySelector('#housing-rooms');
   var guestsSelect = filter.querySelector('#housing-guests');
   var featuresFieldset = filter.querySelector('#housing-features');
-  var price = {
-    low: {
-      min: 0,
-      max: 10000
+  var PriceSelection = {
+    LOW: {
+      MIN: 0,
+      MAX: 10000
     },
-    middle: {
-      min: 10000,
-      max: 50000
+    MIDDLE: {
+      MIN: 10000,
+      MAX: 50000
     },
-    high: {
-      min: 50000,
-      max: Infinity
+    HIGH: {
+      MIN: 50000,
+      MAX: Infinity
     }
   };
 
@@ -40,8 +40,8 @@
   }
 
   function priceFilter(item) {
-    var filteringPrice = price[priceSelect.value.toUpperCase()];
-    return filteringPrice ? item.offer.price >= filteringPrice.min && item.offer.price <= filteringPrice.max : true;
+    var filteringPrice = PriceSelection[priceSelect.value.toUpperCase()];
+    return filteringPrice ? item.offer.price >= filteringPrice.MIN && item.offer.price <= filteringPrice.MAX : true;
   }
 
   function roomsFilter(item) {
@@ -81,7 +81,7 @@
 
   function reset() {
     filterItems.forEach(function (it) {
-      it.value = 'any';
+      it.value === 'any';
     });
     var featuresItems = featuresFieldset.querySelectorAll('input');
     featuresItems.forEach(function (feature) {

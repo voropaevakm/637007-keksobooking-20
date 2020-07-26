@@ -18,7 +18,7 @@
   var maxTitleLength = titleInput.getAttribute('maxlength');
   var timeInInput = document.querySelector('#timein');
   var timeOutInput = document.querySelector('#timeout');
-  var roomsGuestsValues = {
+  var RoomsGuestsValues = {
     1: [1],
     2: [1, 2],
     3: [1, 2, 3],
@@ -84,7 +84,7 @@
     capacityOptions.forEach(function (option) {
       option.disabled = true;
     });
-    roomsGuestsValues[person].forEach(function (amount) {
+    RoomsGuestsValues[person].forEach(function (amount) {
       capacityOptions.forEach(function (option) {
         if (Number(option.value) === amount) {
           option.disabled = false;
@@ -107,7 +107,7 @@
 
   function onSubmitSuccess() {
     getSuccess();
-    window.map.pageStatus();
+    window.map.activatePage();
   }
 
   function onSubmitError(errorMessage) {
@@ -179,8 +179,7 @@
 
   function onResetBtnClick(evt) {
     evt.preventDefault();
-    window.map.initPage();
-    window.loadPhoto.remove();
+    window.map.activatePage();
   }
 
   function debounce(cb) {
@@ -188,9 +187,9 @@
     return function () {
       var parameters = arguments;
       if (lastTimeout) {
-        window.clearTimeout(lastTimeout);
+        clearTimeout(lastTimeout);
       }
-      lastTimeout = window.setTimeout(function () {
+      lastTimeout = setTimeout(function () {
         cb.apply(null, parameters);
       }, DEBOUNCE_INTERVAL);
     };
