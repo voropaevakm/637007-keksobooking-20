@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var url = {
+  var serverUrls = {
     load: 'https://javascript.pages.academy/keksobooking/data',
     upload: 'https://javascript.pages.academy/keksobooking'
   };
@@ -32,11 +32,11 @@
   }
 
   function load(onSuccess, onError) {
-    createXhr('GET', url.load, onSuccess, onError).send();
+    createXhr('GET', serverUrls.load, onSuccess, onError).send();
   }
 
   function upload(onSuccess, onError, data) {
-    createXhr('POST', url.upload, onSuccess, onError).send(data);
+    createXhr('POST', serverUrls.upload, onSuccess, onError).send(data);
   }
 
   window.backend = {

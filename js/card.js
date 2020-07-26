@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-  var map = document.querySelector('.map');
   var similarCardTemplate = document.querySelector('#card').content.querySelector('.map__card');
   var arrayOfTypes = {
     palace: 'Дворец',
@@ -84,7 +83,7 @@
   function removeCard() {
     var mapCard = document.querySelector('.map__card');
     if (mapCard) {
-    mapCard.remove();
+      mapCard.remove();
     }
   }
 
