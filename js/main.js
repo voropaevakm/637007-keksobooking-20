@@ -14,8 +14,6 @@
   var priceInput = document.querySelector('#price');
   var typeInput = document.querySelector('#type');
   var titleInput = document.querySelector('#title');
-  var minTitleLength = titleInput.getAttribute('minlength');
-  var maxTitleLength = titleInput.getAttribute('maxlength');
   var timeInInput = document.querySelector('#timein');
   var timeOutInput = document.querySelector('#timeout');
   var RoomsGuestsValues = {
@@ -24,11 +22,11 @@
     3: [1, 2, 3],
     100: [0]
   };
-  var flatMinPrices = {
-    bungalo: 0,
-    flat: 1000,
-    house: 5000,
-    palace: 10000
+  var FlatMinPrices = {
+    BUNGALO: 0,
+    FLAT: 1000,
+    HOUSE: 5000,
+    PALACE: 10000
   };
 
   function activationFilterInput(elements, flag) {
@@ -43,25 +41,6 @@
     }
   }
 
-  titleInput.addEventListener('invalid', function () {
-    if (titleInput.validity.valueMissing) {
-      titleInput.setCustomValidity('Обязательное поле');
-    } else {
-      titleInput.setCustomValidity('');
-    }
-  });
-
-  titleInput.addEventListener('input', function () {
-    var valueLength = titleInput.value.length;
-    if (valueLength < minTitleLength) {
-      titleInput.setCustomValidity('Ещё ' + (minTitleLength - valueLength) + ' симв.');
-    } else if (valueLength > maxTitleLength) {
-      titleInput.setCustomValidity('Удалите лишние ' + (valueLength - maxTitleLength) + ' симв.');
-    } else {
-      titleInput.setCustomValidity('');
-    }
-  });
-
   function setTitleBorder() {
     titleInput.style.border = BORDER;
   }
@@ -75,8 +54,8 @@
   }
 
   function changeTypeInput(evt) {
-    priceInput.min = flatMinPrices[evt.target.value];
-    priceInput.placeholder = flatMinPrices[evt.target.value];
+    priceInput.min = FlatMinPrices[evt.target.value.toUpperCase()];
+    priceInput.placeholder = FlatMinPrices[evt.target.value.toUpperCase()];
   }
 
   function changeRoomsNumbers(person) {
@@ -182,6 +161,19 @@
     window.map.activatePage();
   }
 
+  function checkTitleValidity() {
+    var minTitleLength = titleInput.getAttribute('minlength');
+    var maxTitleLength = titleInput.getAttribute('maxlength');
+    var valueLength = titleInput.value.length;
+    if (valueLength < minTitleLength) {
+      titleInput.setCustomValidity('Ещё ' + (minTitleLength - valueLength) + ' симв.');
+    } else if (valueLength > maxTitleLength) {
+      titleInput.setCustomValidity('Удалите лишние ' + (valueLength - maxTitleLength) + ' симв.');
+    } else {
+      titleInput.setCustomValidity('');
+    }
+  }
+
   function debounce(cb) {
     var lastTimeout = null;
     return function () {
@@ -199,10 +191,11 @@
   activationFilterInput(adFormFieldsets, false);
   adForm.addEventListener('submit', onAdFormSubmit);
   resetBtn.addEventListener('click', onResetBtnClick);
-  titleInput.addEventListener('invalid', setTitleBorder);
   timeInInput.addEventListener('change', changeTimeInInput);
   timeOutInput.addEventListener('change', changeTimeOutInput);
   typeInput.addEventListener('change', changeTypeInput);
+  titleInput.addEventListener('input', checkTitleValidity);
+  titleInput.addEventListener('invalid', setTitleBorder);
 
   window.main = {
     activationFilterInput: activationFilterInput,
