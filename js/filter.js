@@ -81,12 +81,13 @@
 
   function reset() {
     filterItems.forEach(function (it) {
-      it.value == 'any';
+      it.value === 'any';
     });
     var featuresItems = featuresFieldset.querySelectorAll('input');
     featuresItems.forEach(function (feature) {
       feature.checked = false;
     });
+    return;
   }
 
   function deactivate() {
