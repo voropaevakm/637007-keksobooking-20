@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-  var BORDER = '2px solid red';
   var DEBOUNCE_INTERVAL = 300;
   var main = document.querySelector('main');
   var adForm = document.querySelector('.ad-form');
@@ -39,10 +38,6 @@
         elements[i].removeAttribute('disabled', false);
       }
     }
-  }
-
-  function setTitleBorder() {
-    titleInput.style.border = BORDER;
   }
 
   function changeTimeInInput() {
@@ -161,7 +156,7 @@
     window.map.activatePage();
   }
 
-  function checkTitleValidity() {
+  function checkTitleValidation() {
     var minTitleLength = titleInput.getAttribute('minlength');
     var maxTitleLength = titleInput.getAttribute('maxlength');
     var valueLength = titleInput.value.length;
@@ -194,8 +189,7 @@
   timeInInput.addEventListener('change', changeTimeInInput);
   timeOutInput.addEventListener('change', changeTimeOutInput);
   typeInput.addEventListener('change', changeTypeInput);
-  titleInput.addEventListener('input', checkTitleValidity);
-  titleInput.addEventListener('invalid', setTitleBorder);
+  titleInput.addEventListener('input', checkTitleValidation);
 
   window.main = {
     activationFilterInput: activationFilterInput,
