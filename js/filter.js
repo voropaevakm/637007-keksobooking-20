@@ -81,9 +81,7 @@
 
   function reset() {
     filterItems.forEach(function (it) {
-      it.value === 'any';
-
-      return;
+      return it.value === 'any';
     });
     var featuresItems = featuresFieldset.querySelectorAll('input');
     featuresItems.forEach(function (feature) {
