@@ -1,9 +1,9 @@
 'use strict';
 
 (function () {
-  var serverUrls = {
-    load: 'https://javascript.pages.academy/keksobooking/data',
-    upload: 'https://javascript.pages.academy/keksobooking'
+  var ServerUrls = {
+    LOAD: 'https://javascript.pages.academy/keksobooking/data',
+    UPLOAD: 'https://javascript.pages.academy/keksobooking'
   };
 
   function createXhr(method, url, onSuccess, onError) {
@@ -32,11 +32,11 @@
   }
 
   function load(onSuccess, onError) {
-    createXhr('GET', serverUrls.load, onSuccess, onError).send();
+    createXhr('GET', ServerUrls.LOAD, onSuccess, onError).send();
   }
 
   function upload(onSuccess, onError, data) {
-    createXhr('POST', serverUrls.upload, onSuccess, onError).send(data);
+    createXhr('POST', ServerUrls.UPLOAD, onSuccess, onError).send(data);
   }
 
   window.backend = {
