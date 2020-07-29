@@ -5,7 +5,6 @@
   var main = document.querySelector('main');
   var adForm = document.querySelector('.ad-form');
   var resetBtn = document.querySelector('.ad-form__reset');
-  var filter = document.querySelector('.map__filters');
   var priceInput = document.querySelector('#price');
   var typeInput = document.querySelector('#type');
   var titleInput = document.querySelector('#title');
@@ -110,7 +109,7 @@
     errorButton.addEventListener('click', onErrorBtnClick);
     main.append(similarErrorMessage);
     message.addEventListener('click', onErrorClick);
-    main.append(similarSuccessMessage);
+    main.append(similarErrorMessage);
   }
 
   function deleteSuccessMessage() {

@@ -75,13 +75,11 @@
     window.filter.deactivate();
     renderAddress(false, location);
     titleInput.style.border = '';
-    activePage = false;
     getMainPinDefault();
   }
 
   function activatePage() {
     deactivateMap();
-    activePage = false;
     mainPin.addEventListener('mousedown', mainPinMouseDown);
     mainPin.addEventListener('keydown', mainPinKeyDown);
   }
