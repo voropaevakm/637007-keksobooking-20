@@ -109,8 +109,10 @@
     var errorButton = similarErrorMessage.querySelector('.error__button');
     var message = similarErrorMessage.querySelector('.error__message');
     message.textContent = errorMessage;
-    errorButton.addEventListener('click', onErrorClick);
+    errorButton.addEventListener('click', onErrorBtnClick);
     main.append(similarErrorMessage);
+    message.addEventListener('click', onErrorClick);
+    main.append(similarSuccessMessage);
   }
 
   function deleteSuccessMessage() {
@@ -156,6 +158,10 @@
   }
 
   function onErrorClick() {
+    closeError();
+  }
+
+  function onErrorBtnClick() {
     closeError();
   }
 
