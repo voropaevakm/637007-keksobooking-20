@@ -5,9 +5,7 @@
   var main = document.querySelector('main');
   var adForm = document.querySelector('.ad-form');
   var resetBtn = document.querySelector('.ad-form__reset');
-  var adFormFieldsets = document.querySelectorAll('.ad-form__element');
   var filter = document.querySelector('.map__filters');
-  var filterItems = filter.querySelectorAll('select, input');
   var priceInput = document.querySelector('#price');
   var typeInput = document.querySelector('#type');
   var titleInput = document.querySelector('#title');

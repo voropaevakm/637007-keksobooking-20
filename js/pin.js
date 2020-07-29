@@ -10,12 +10,12 @@
     if (activePin) {
       activePin.classList.remove('map__pin--active');
     }
-  };
+  }
 
   function addActiveClassPin(pin) {
     removeActiveClassPin();
     pin.classList.add('map__pin--active');
-  };
+  }
 
   function createPins(announcement) {
     var pinElement = similarPinTemplate.cloneNode(true);
@@ -24,7 +24,7 @@
     pinElement.style = 'left: ' + announcement.location.x + 'px; top: ' + announcement.location.y + 'px;';
     pinElement.addEventListener('click', function () {
       map.appendChild(window.card.createCard(announcement));
-       addActiveClassPin(pinElement);
+      addActiveClassPin(pinElement);
     });
     return pinElement;
   }
@@ -44,7 +44,7 @@
       pinElement.tabIndex = index + 1;
     });
     mapPins.appendChild(fragment);
-  };
+  }
 
   function removePins() {
     var mapPinsItems = document.querySelectorAll('.map__pin:not(.map__pin--main)');

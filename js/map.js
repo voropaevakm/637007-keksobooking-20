@@ -2,6 +2,12 @@
 
 (function () {
 
+  var MAP_WIDTH = document.querySelector('.map').offsetWidth;
+  var MAP_HEIGHT = document.querySelector('.map').offsetHeight;
+  var MAIN_PIN_WIDTH = document.querySelector('.map__pin--main').offsetWidth;
+  var MAIN_PIN_HEIGHT = document.querySelector('.map__pin--main').offsetHeight;
+  var MAIN_PIN_CURSOR_HEIGHT = 22;
+  var MAIN_PIN_DEFAULT = 'left: 570px; top: 375px;';
   var map = document.querySelector('.map');
   var mainPin = document.querySelector('.map__pin--main');
   var adForm = document.querySelector('.ad-form');
@@ -9,20 +15,11 @@
   var filter = document.querySelector('.map__filters');
   var filterItems = filter.querySelectorAll('select, input');
   var titleInput = document.querySelector('#title');
-  var activePage = false;
-
-  var MAP_WIDTH = document.querySelector('.map').offsetWidth;
-  var MAP_HEIGHT = document.querySelector('.map').offsetHeight;
-  var MAIN_PIN_WIDTH = document.querySelector('.map__pin--main').offsetWidth;
-  var MAIN_PIN_HEIGHT = document.querySelector('.map__pin--main').offsetHeight;
-  var MAIN_PIN_CURSOR_HEIGHT = 22;
-  var MAIN_PIN_DEFAULT = 'left: 570px; top: 375px;';
   var adFormAddress = document.querySelector('#address');
   var location = {
     x: Math.round(mainPin.offsetLeft + MAIN_PIN_WIDTH / 2),
     y: Math.round(mainPin.offsetTop + MAIN_PIN_HEIGHT / 2)
   };
-  var mainPin = document.querySelector('.map__pin--main');
 
   var getMainPinDefault = function () {
     mainPin.style = MAIN_PIN_DEFAULT;
