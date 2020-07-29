@@ -2,6 +2,7 @@
 
 (function () {
   var similarCardTemplate = document.querySelector('#card').content.querySelector('.map__card');
+
   var arrayOfTypes = {
     palace: 'Дворец',
     flat: 'Квартира',
@@ -60,7 +61,7 @@
     nodeElement.src = data;
   }
 
-  function renderCardFragment(announcement) {
+  function createCard(announcement) {
     var cardElement = similarCardTemplate.cloneNode(true);
     var closeCardButton = cardElement.querySelector('.popup__close');
     createAvatar(cardElement.querySelector('.popup__avatar'), announcement.author.avatar);
@@ -73,10 +74,9 @@
     changeData(cardElement.querySelector('.popup__description'), announcement.offer.description, true, announcement.offer.description);
     renderCardFeatures(cardElement.querySelector('.popup__features'), announcement.offer.features);
     renderCardPhotos(cardElement.querySelector('.popup__photos'), announcement.offer.photos);
-    closeCardButton.addEventListener('click', removeCard);
-    removeEventListener('click', closeCardButton);
-    document.addEventListener('keydown', closeCard);
-    removeEventListener('keydown', closeCard);
+    closeCardButton.addEventListener('click', onCardCloseClick);
+    document.addEventListener('keydown', onCardCloseEscape);
+    removeCard();
     return cardElement;
   }
 
@@ -87,12 +87,18 @@
     }
   }
 
-  function closeCard(evt) {
+  function onCardCloseClick(evt) {
+    window.utils.onBtnDown(evt, removeCard);
+    removeEventListener('click', onCardCloseClick);
+  }
+
+  function onCardCloseEscape(evt) {
     window.utils.onEscDown(evt, removeCard);
+    document.removeEventListener('keydown', onCardCloseEscape);
   }
 
   window.card = {
-    renderCardFragment: renderCardFragment,
+    createCard: createCard,
     remove: removeCard
   };
 

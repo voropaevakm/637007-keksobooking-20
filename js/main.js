@@ -8,18 +8,30 @@
   var adFormFieldsets = document.querySelectorAll('.ad-form__element');
   var filter = document.querySelector('.map__filters');
   var filterItems = filter.querySelectorAll('select, input');
-  var capacitySelect = document.querySelector('#capacity');
-  var roomNumberSelect = document.querySelector('#room_number');
   var priceInput = document.querySelector('#price');
   var typeInput = document.querySelector('#type');
   var titleInput = document.querySelector('#title');
   var timeInInput = document.querySelector('#timein');
   var timeOutInput = document.querySelector('#timeout');
-  var RoomsGuestsValues = {
-    1: [1],
-    2: [1, 2],
-    3: [1, 2, 3],
-    100: [0]
+  var roomsInput = document.querySelector('#room_number');
+  var capacityInput = document.querySelector('#capacity');
+  var guestsInRoom = {
+    1: {
+      guestsValue: [1],
+      error: 'В 1-ой комнате может быть 1 гость',
+    },
+    2: {
+      guestsValue: [1, 2],
+      error: 'В 2-х комнатах может быть 2 или 1 гостей'
+    },
+    3: {
+      guestsValue: [1, 2, 3],
+      error: 'В 3-х комнатах может быть 3, 2 или 1 гостей'
+    },
+    100: {
+      guestsValue: [0],
+      error: '100 комнат не для гостей'
+    },
   };
   var FlatMinPrices = {
     BUNGALO: 0,
@@ -28,16 +40,14 @@
     PALACE: 10000
   };
 
-  function activationFilterInput(elements, flag) {
-    if (!flag) {
-      for (var i = 0; i < elements.length; i++) {
-        elements[i].setAttribute('disabled', false);
+  function activationFilterInput(element, flag) {
+    element.forEach(function (it) {
+      if (flag) {
+        it.disabled = true;
+      } else {
+        it.disabled = false;
       }
-    } else {
-      for (i = 0; i < elements.length; i++) {
-        elements[i].removeAttribute('disabled', false);
-      }
-    }
+    });
   }
 
   function changeTimeInInput() {
@@ -53,25 +63,23 @@
     priceInput.placeholder = FlatMinPrices[evt.target.value.toUpperCase()];
   }
 
-  function changeRoomsNumbers(person) {
-    var capacityOptions = capacitySelect.querySelectorAll('option');
-    capacityOptions.forEach(function (option) {
-      option.disabled = true;
+  var validateRoomsGuests = function () {
+    capacityInput.setCustomValidity('');
+    roomsInput.setCustomValidity('');
+    var validValue = guestsInRoom[roomsInput.value].guestsValue.find(function (number) {
+      return number === Number(capacityInput.value);
     });
-    RoomsGuestsValues[person].forEach(function (amount) {
-      capacityOptions.forEach(function (option) {
-        if (Number(option.value) === amount) {
-          option.disabled = false;
-          option.selected = true;
-        }
-      });
-    });
-  }
+    return validValue ? true : (
+      capacityInput.setCustomValidity(guestsInRoom[roomsInput.value].error),
+      roomsInput.setCustomValidity(guestsInRoom[roomsInput.value].error));
+  };
 
-  roomNumberSelect.addEventListener('change', function (evt) {
-    var person = evt.target;
-    changeRoomsNumbers(person.value);
-  });
+  var onRoomsGuestsChange = function () {
+    validateRoomsGuests();
+  };
+
+  roomsInput.addEventListener('change', onRoomsGuestsChange);
+  capacityInput.addEventListener('change', onRoomsGuestsChange);
 
   function onAdFormSubmit(evt) {
     evt.preventDefault();
@@ -111,8 +119,8 @@
   }
 
   function deleteErrorMessage() {
-    var errorMessageGenerated = main.querySelector('.error');
-    errorMessageGenerated.remove();
+    var errorMessage = main.querySelector('.error');
+    errorMessage.remove();
   }
 
   function getSuccess() {
@@ -182,8 +190,6 @@
     };
   }
 
-  activationFilterInput(filterItems, false);
-  activationFilterInput(adFormFieldsets, false);
   adForm.addEventListener('submit', onAdFormSubmit);
   resetBtn.addEventListener('click', onResetBtnClick);
   timeInInput.addEventListener('change', changeTimeInInput);
@@ -193,7 +199,6 @@
 
   window.main = {
     activationFilterInput: activationFilterInput,
-    changeRoomsNumbers: changeRoomsNumbers,
     debounce: debounce,
     getError: getError
   };

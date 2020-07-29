@@ -3,13 +3,13 @@
 (function () {
 
   function onEscDown(evt, action) {
-    if (evt.keyCode === 27) {
+    if (evt.key === 'Escape') {
       action();
     }
   }
 
   function onEnterDown(evt, action) {
-    if (evt.keyCode === 13) {
+    if (evt.key === 'Enter') {
       action();
     }
   }
